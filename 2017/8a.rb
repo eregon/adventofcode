@@ -10,8 +10,7 @@ registers = Hash.new(0)
 
 code = input.strip.lines.map { |line|
   if /^(?<reg>\w+) (?<dir>inc|dec) (?<by>-?\d+) if (?<r>\w+) (?<cmp>[>=<!]+) (?<n>-?\d+)$/ =~ line
-    by = by.to_i
-    by = -by if dir == "dec"
+    by = by.to_i * (dir == "dec" ? -1 : 1)
     if registers[r].send(cmp, n.to_i)
       registers[reg] += by
     end
