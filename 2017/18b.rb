@@ -52,9 +52,11 @@ class Program
         -> {
           ok = false
           begin
+            # On deadlock, raises a fatal exception which cannot be caught by rescue
             @registers[r] = @queue.pop
             ok = true
           ensure
+            # But we can still execute code!
             puts "Program #{@pid} sent #{@sends} messages\n" unless ok
           end
         }
