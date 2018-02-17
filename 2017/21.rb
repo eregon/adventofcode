@@ -31,8 +31,7 @@ input.lines.each { |line|
   }
 }
 
-Integer(ARGV[0] || 5).times do |i|
-  p i
+(1..18).each do |i|
   size = board.row_count
   n = size.even? ? 2 : 3
   raise unless size % n == 0
@@ -41,7 +40,10 @@ Integer(ARGV[0] || 5).times do |i|
       rules.fetch board.minor(i, n, j, n)
     }
   }
-  puts board
-end
+  # p i
+  # puts board
 
-p board.to_a.flat_map(&:itself).count(&:itself)
+  if i == 5 or i == 18
+    p board.to_a.flat_map(&:itself).count(&:itself)
+  end
+end
