@@ -15,10 +15,13 @@ def distance(particle)
   particle.position.to_a.map(&:abs).reduce(:+)
 end
 
-loop do
+closest = Hash.new(0)
+begin
   particles.each { |particle|
     particle.position += particle.velocity += particle.acceleration
   }
   closer = particles.min_by { |particle| distance(particle) }
-  p [particles.index(closer), closer.position]
-end
+  idx = particles.index(closer)
+end until (closest[idx] += 1) == 1000
+
+p idx

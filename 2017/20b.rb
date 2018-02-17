@@ -11,8 +11,8 @@ particles = input.strip.lines.map { |line|
   }
 }
 
-loop do
-  p particles.size
+left = Hash.new(0)
+until (left[particles.size] += 1) == 1000
   collisions = {}
   destroyed = []
 
@@ -26,3 +26,5 @@ loop do
   }
   destroyed.each { |particle| particles.delete(particle) }
 end
+
+p particles.size
