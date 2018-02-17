@@ -5,7 +5,7 @@ class Program
   OP = /(?:#{REG}|-?\d+)/
 
   attr_writer :other
-  attr_reader :queue
+  attr_reader :queue, :sends
 
   def initialize(input, pid)
     @pid = pid
@@ -46,19 +46,13 @@ class Program
         -> {
           @sends += 1
           @other.queue << v.call
+          Fiber.yield :send
         }
       when /^rcv (#{REG})$/
         r = $1
         -> {
-          ok = false
-          begin
-            # On deadlock, raises a fatal exception which cannot be caught by rescue
-            @registers[r] = @queue.pop
-            ok = true
-          ensure
-            # But we can still execute code!
-            puts "Program #{@pid} sent #{@sends} messages\n" unless ok
-          end
+          Fiber.yield :waiting while @queue.empty?
+          @registers[r] = @queue.pop
         }
       when /^jgz (#{OP}) (#{OP})$/
         v, off = val($1), val($2)
@@ -84,7 +78,16 @@ class Program
   end
 end
 
-a = Program.new(input, 0)
-b = Program.new(input, 1)
+a, b = Program.new(input, 0), Program.new(input, 1)
 a.other, b.other = b, a
-[a, b].map { |prog| Thread.new { prog.run } }.each(&:join)
+progs = [a, b].map { |prog| Fiber.new { prog.run } }.cycle
+
+last = :send
+loop do
+  result = progs.next.resume
+  if result == :waiting and last == :waiting
+    p b.sends
+    break
+  end
+  last = result
+end
