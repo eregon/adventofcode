@@ -1,6 +1,6 @@
 claims = File.readlines("3.txt", chomp: true).map { |s|
-  s =~ /#\d+ @ (\d+),(\d+): (\d+)x(\d+)/
-  [$1.to_i...($1.to_i+$3.to_i), $2.to_i...($2.to_i+$4.to_i)]
+  id, x, y, dx, dy = s.split(/\D+/).reject(&:empty?).map(&:to_i)
+  [x...x+dx, y...y+dy]
 }
 
 fabric = Hash.new { |h,k| h[k] = Hash.new(0) }
