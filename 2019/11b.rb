@@ -41,7 +41,6 @@ def interpreter(memory, input, output)
     end
   }
 
-  result = nil
   while true
     instruction = memory[ip]
     mode, opcode = instruction.divmod(100)
@@ -56,8 +55,7 @@ def interpreter(memory, input, output)
       write[1, input.call]
       ip += 2
     when 4 # output
-      result = read[1]
-      output.call(result)
+      output.call(read[1])
       ip += 2
     when 5 # jump-if-true
       if read[1] != 0
@@ -86,7 +84,6 @@ def interpreter(memory, input, output)
       raise "Unknown opcode: #{opcode} at #{ip} (#{instruction})"
     end
   end
-  result
 end
 
 BLACK = 0
