@@ -58,17 +58,9 @@ def interpreter(memory, input, output)
       output.call(read[1])
       ip += 2
     when 5 # jump-if-true
-      if read[1] != 0
-        ip = read[2]
-      else
-        ip += 3
-      end
+      ip = read[1] != 0 ? read[2] : ip + 3
     when 6 # jump-if-false
-      if read[1] == 0
-        ip = read[2]
-      else
-        ip += 3
-      end
+      ip = read[1] == 0 ? read[2] : ip + 3
     when 7 # less than
       write[3, read[1] < read[2] ? 1 : 0]
       ip += 4
