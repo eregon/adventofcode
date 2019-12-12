@@ -42,6 +42,4 @@ def simulate(dim)
 end
 RUBY
 
-loops = dimensions.times.map { |dim| simulate(dim) }
-lcm = loops.reduce { |a,b| (a * b) / a.gcd(b) }
-p lcm
+p dimensions.times.map { |dim| simulate(dim) }.reduce(:lcm)
