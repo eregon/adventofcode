@@ -14,14 +14,19 @@ input.each_line { |line|
   ]
 }
 
-MAX_ORE = 1_000_000_000
-available = { FUEL: -1, ORE: MAX_ORE }.tap { |h| h.default = 0 }
+needed_ore = 0
+available = { FUEL: -1 }.tap { |h| h.default = 0 }
 
 while missing = available.each_pair.find { |c,q| q < 0 }
-  chemical, _needed = missing
-  produced, inputs = reactions.fetch(chemical)
-  inputs.each { |q,c| available[c] -= q }
-  available[chemical] += produced
+  chemical, needed = missing
+  if chemical == :ORE
+    needed_ore += needed.abs
+    available[:ORE] = 0
+  else
+    produced, inputs = reactions.fetch(chemical)
+    inputs.each { |q,c| available[c] -= q }
+    available[chemical] += produced
+  end
 end
 
-p MAX_ORE - available[:ORE]
+p needed_ore
