@@ -78,31 +78,17 @@ def interpreter(memory, input, output)
   end
 end
 
-require 'io/console'
-
 TYPES = [' ', '#', '+', 'T', '*']
 DIRS = %w[a s d]
 tiles = Hash.new(TYPES[0])
-
-saved_inputs = File.new('input13.txt', 'a')
-saved_inputs.sync = true
-inputs = File.readlines('input13.txt', chomp: true)
 
 f = Fiber.new do
   memory = code.dup
   memory[0] = 2
   interpreter(memory, -> {
-    if !inputs.empty?
-      input = inputs.shift
-    else
-      begin
-        input = STDIN.getch
-        exit if input == 'q'
-      end until DIRS.include?(input)
-      saved_inputs.puts input
-    end
-
-    DIRS.index(input) - 1
+    ball = tiles.key('*')
+    paddle = tiles.key('T')
+    ball.real <=> paddle.real
   }, -> r { Fiber.yield(r) })
   nil
 end
