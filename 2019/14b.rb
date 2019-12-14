@@ -16,12 +16,12 @@ input.each_line { |line|
 
 MAX_ORE = 1_000_000_000_000
 
-p (1..MAX_ORE).bsearch(&-> fuel {
+p (1..MAX_ORE).bsearch { |fuel|
   available = { FUEL: -fuel, ORE: MAX_ORE }.tap { |h| h.default = 0 }
 
   while missing = available.each_pair.find { |c,q| q < 0 }
     chemical, needed = missing
-    return true if chemical == :ORE
+    break if chemical == :ORE
 
     produced, inputs = reactions.fetch(chemical)
     multiplier = (needed.abs + (produced-1)) / produced
@@ -29,5 +29,5 @@ p (1..MAX_ORE).bsearch(&-> fuel {
     available[chemical] += produced * multiplier
   end
 
-  false
-})-1
+  available[:ORE] < 0
+} - 1
