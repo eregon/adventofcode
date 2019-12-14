@@ -93,23 +93,14 @@ f = Fiber.new do
   nil
 end
 
+score = 0
 while x = f.resume
   y = f.resume
   id = f.resume
-  if x == -1 and y == 0
-    puts "Score: #{id}"
+  if x < 0
+    score = id
   else
-    prev = tiles[x + y.i]
-    if id == 0 and prev == '*'
-      tiles[x + y.i] = '.'
-    else
-      tiles[x + y.i] = TYPES[id]
-    end
+    tiles[x + y.i] = TYPES[id]
   end
-
-  puts "\n" * 50 + Range.new(*tiles.keys.map(&:imag).minmax).map { |y|
-    Range.new(*tiles.keys.map(&:real).minmax).map { |x|
-      tiles[x + y.i]
-    }.join
-  }.join("\n")
 end
+p score
