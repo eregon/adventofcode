@@ -1,5 +1,5 @@
 def between?(a, b)
-  -> s { n = s[/^\d+$/] and n.to_i.between?(a, b) }
+  -> s { Integer(s, exception: false)&.between?(a, b) }
 end
 
 FIELDS = {
@@ -7,11 +7,11 @@ FIELDS = {
   iyr: between?(2010, 2020),
   eyr: between?(2020, 2030),
   hgt: -> s {
-    /^(?<v>\d+)cm$/ =~ s && v.to_i.between?(150, 193) or
-    /^(?<v>\d+)in$/ =~ s && v.to_i.between?(59, 76)
+    /^(?<v>\d+)(?<unit>cm|in)$/ =~ s and
+    (unit == 'cm' ? between?(150, 193) : between?(59, 76)) === v
   },
   hcl: /^#\h{6}$/,
-  ecl: /^(amb|blu|brn|gry|grn|hzl|oth)$/,
+  ecl: %w[amb blu brn gry grn hzl oth].method(:include?),
   pid: /^\d{9}$/,
 }
 
