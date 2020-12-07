@@ -20,4 +20,10 @@ module Refinements
       0
     end
   end
+
+  refine Kernel do
+    def deep_copy
+      Marshal.load(Marshal.dump(self))
+    end
+  end
 end
