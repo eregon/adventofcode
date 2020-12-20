@@ -26,6 +26,26 @@ module Refinements
       Marshal.load(Marshal.dump(self))
     end
   end
+
+  refine Complex do
+    def round
+      Complex(*rect.map(&:round))
+    end
+  end
+end
+
+class RepeatingArray
+  def initialize(array)
+    @array = array
+  end
+
+  def index(e)
+    @array.index(e)
+  end
+
+  def [](i)
+    @array[i % @array.size]
+  end
 end
 
 class Matrix2D

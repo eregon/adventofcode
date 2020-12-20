@@ -1,16 +1,6 @@
 require_relative 'lib'
 using Refinements
 
-class RepeatingArray
-  def initialize(array)
-    @array = array
-  end
-
-  def [](i)
-    @array[i % @array.size]
-  end
-end
-
 map = File.readlines('3.txt', chomp: true).map { |line|
   RepeatingArray.new line.chars.map { |c| c == '#' }
 }
