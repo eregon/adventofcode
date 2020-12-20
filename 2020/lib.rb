@@ -27,3 +27,41 @@ module Refinements
     end
   end
 end
+
+class Matrix2D
+  include Enumerable
+
+  attr_reader :rows
+
+  def initialize(rows)
+    @rows = rows
+  end
+
+  def [](i, j = (_, i = i.rect)[0])
+    j >= 0 and i >= 0 and row = @rows[i] and row[j]
+  end
+
+  def each(&block)
+    @rows.each { |row| row.each(&block) }
+  end
+
+  def map
+    Matrix2D.new @rows.map.with_index { |row, i|
+      row.map.with_index { |cell, j|
+        yield cell, i.i+j
+      }
+    }
+  end
+
+  def ==(other)
+    @rows == other.rows
+  end
+
+  def dup
+    Matrix2D.new @rows.map(&:dup)
+  end
+
+  def to_s
+    @rows.map(&:join).join("\n") + "\n" * 2
+  end
+end
