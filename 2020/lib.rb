@@ -32,6 +32,12 @@ module Refinements
       Complex(*rect.map(&:round))
     end
   end
+
+  refine Array do
+    def minmax_range
+      Range.new(*minmax)
+    end
+  end
 end
 
 class RepeatingArray
