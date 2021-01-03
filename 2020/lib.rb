@@ -37,6 +37,18 @@ module Refinements
     def minmax_range
       Range.new(*minmax)
     end
+
+    def rotate_right
+      transpose.map(&:reverse)
+    end
+
+    def flip_horizontally
+      map(&:reverse)
+    end
+
+    def flip_vertically
+      reverse
+    end
   end
 end
 
