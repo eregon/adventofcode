@@ -1,5 +1,5 @@
 decks = File.read('22.txt').strip.split("\n\n").map { |chunk|
-  chunk.lines.then { |player, *cards| cards.map { Integer(_1) } }
+  chunk.lines.then { |player, *cards| cards.map { |c| Integer(c) } }
 }
 
 def play_game(decks)
