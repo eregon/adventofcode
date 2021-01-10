@@ -4,6 +4,7 @@
 
 module Refinements
   refine String do
+    remove_method :to_i if self == String
     def to_i
       Integer(self)
     end
