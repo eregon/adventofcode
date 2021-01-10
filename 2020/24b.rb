@@ -13,18 +13,18 @@ WHITE, BLACK = false, true
 tiles = Hash.new(WHITE)
 
 DIRS = {
-  e:  0i + 1,
-  se: 1i,
-  sw: 1i - 1,
-  w:  0i - 1,
-  nw: -1i,
-  ne: -1i + 1,
+  e:  0.i + 1,
+  se: 1.i,
+  sw: 1.i - 1,
+  w:  0.i - 1,
+  nw: -1.i,
+  ne: -1.i + 1,
 }.freeze
 
 NEIGHBORS = DIRS.values.freeze
 
 moves.each { |move|
-  pos = 0 + 0i
+  pos = 0 + 0.i
   move.each { |step| pos += DIRS[step] }
   tiles[pos] = !tiles[pos]
 }
