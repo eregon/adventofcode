@@ -22,7 +22,8 @@ data = BENCHMARKS.map { |bench|
   puts bench
 
   file = bench
-  file = ".rbnext/#{file}" if RUBY2 && File.exist?(".rbnext/#{file}")
+  rbnext_file = ".rbnext/#{file}"
+  file = rbnext_file if File.exist?(rbnext_file) and (RUBY2 or RUBY_ENGINE != 'ruby')
 
   result_file = "#{RESULTS_DIR}/#{File.basename(bench, '.rb')}.txt"
 
