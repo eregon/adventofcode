@@ -14,12 +14,9 @@ crossings = Hash.new(0)
 lines.each { |a,b|
   dir = b - a
   dir /= dir.abs
-  pos = a
-  crossings[pos] += 1
-  until pos == b
-    pos += dir
-    crossings[pos] += 1
-  end
+  Enumerator.produce(a) { _1 + dir }.take_while { _1 != b + dir }.each {
+    crossings[_1] += 1
+  }
 }
 
 p crossings.values.count { _1 > 1 }
