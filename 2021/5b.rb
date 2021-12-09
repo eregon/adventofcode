@@ -13,8 +13,9 @@ lines.each { |a,b|
   dir = b - a
   dir /= [(b.real - a.real).abs, (b.imag - a.imag).abs].max
   pos = a
-  Enumerator.produce(a) { _1 + dir }.take_while { _1 != b + dir }.each {
+  Enumerator.produce(a) { _1 + dir }.find {
     crossings[_1] += 1
+    _1 == b
   }
 }
 
