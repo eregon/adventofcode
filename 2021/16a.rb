@@ -4,7 +4,7 @@ bits = File.read('16.txt').chomp.chars.map { "%04b" % Integer(_1, 16) }.join.fre
 
 index = 0
 read = -> n_bits {
-  bits[index, n_bits].tap { index += n_bits }
+  bits[index...(index += n_bits)]
 }
 
 int = -> n_bits {
