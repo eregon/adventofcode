@@ -1,6 +1,7 @@
 def Integer.to_proc
   -> v { Integer(v) }
 end
+Int = Integer
 
 class Array
   def single
