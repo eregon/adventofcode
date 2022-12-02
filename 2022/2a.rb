@@ -1,21 +1,11 @@
 require_relative 'lib'
 
-ROCK = 1
-PAPER = 2
-SCISSORS = 3
+ALL = (ROCK, PAPER, SCISSORS = 1, 2, 3)
+BEATS = ALL.zip(ALL.rotate(-1)).to_h
 
-BEATS = { ROCK => SCISSORS, PAPER => ROCK, SCISSORS => PAPER }
-
-MAPPING = {
-  'A' => ROCK,
-  'B' => PAPER,
-  'C' => SCISSORS,
-  'X' => ROCK,
-  'Y' => PAPER,
-  'Z' => SCISSORS,
+rounds = File.readlines('2.txt', chomp: true).map(&:split).map {
+  [_1.ord - 'A'.ord + 1, _2.ord - 'X'.ord + 1]
 }
-
-rounds = File.readlines('2.txt', chomp: true).map(&:split).map { [MAPPING[_1], MAPPING[_2]] }
 score = 0
 rounds.each { |opponent, me|
   score += me
