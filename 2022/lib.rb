@@ -30,3 +30,22 @@ module Enumerable
     slices
   end
 end
+
+class ArrayIterator
+  def initialize(array)
+    @array = array
+    @i = 0
+  end
+
+  def peek
+    @array[@i]
+  end
+
+  def next?
+    @i < @array.size
+  end
+
+  def next
+    @array[@i].tap { @i += 1 }
+  end
+end
