@@ -21,4 +21,4 @@ instructions.each { |instruction|
   end
 }
 
-p [20, 60, 100, 140, 180, 220].sum { x_values.fetch(_1) * _1 }
+p (20..220).step(40).sum { x_values.fetch(_1) * _1 }
