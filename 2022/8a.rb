@@ -22,7 +22,7 @@ define_method(:look) { |starts, dir|
       if trees[pos] > max_height
         visible << pos
         max_height = trees[pos]
-      end      
+      end
       prev, pos = pos, pos + dir
     end
   }

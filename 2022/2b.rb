@@ -23,7 +23,7 @@ rounds.each { |opponent, result|
   else
     me = BEATEN_BY[opponent]
   end
-  
+
   score += me
   if BEATS[me] == opponent
     score += 6
