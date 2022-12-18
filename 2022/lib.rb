@@ -16,6 +16,7 @@ class Array
 end
 
 module Enumerable
+  # Like #slice_before but discards the element which yields true
   def slice_at(matcher, &block)
     block ||= -> e { matcher === e }
 
