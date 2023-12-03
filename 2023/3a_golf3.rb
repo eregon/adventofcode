@@ -1,0 +1,1 @@
+s=$<.read;w=s=~/$/;s.scan(/\d+/){|n|i=$`.size;$.+=n.to_i if[i-w-2,i-1,i+w].any?{_1>=0&&s[_1,2+n.size]=~/[^\d\s.]/}};p$.
