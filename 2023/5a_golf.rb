@@ -1,0 +1,1 @@
+a,*b=$<.read.split"\n\n";p a.split[1..].map(&:to_i).map{|v|b.each{_1.lines[1..].each{|l|d,s,z=l.split.map(&:to_i);break v+=d-s if v>=s&&v<s+z}};v}.min
