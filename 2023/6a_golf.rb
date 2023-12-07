@@ -1,0 +1,1 @@
+p$<.map{_1.split[1..].map(&:to_i)}.transpose.map{|t,r|t.times.count{(t-_1)*_1>r}}.reduce(:*)
