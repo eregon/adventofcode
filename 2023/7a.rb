@@ -1,5 +1,5 @@
 hands = $<.map { |line|
-  line.split.then {  [_1.tr('AKQJT', 'EDCBA').chars, _2.to_i] }
+  line.split.then { [_1.tr('AKQJT', 'EDCBA').chars, _2.to_i] }
 }
 
 p hands.sort_by { |hand, bid|
