@@ -1,1 +1,1 @@
-p$<.map(&:split).sort_by{|h,|[(s=(t=(h=h.tr'AKQJT','EDCBA').chars.tally.values).size)*-2-(t.max-6+s).abs,*h]}.zip(1..).sum{_1[-1].to_i*_2}
+p$<.map(&:split).sort_by{|h,|[(t=h.chars.tally.values).max-t.size,h.tr('AKQJT','EDCBA')]}.zip(1..).sum{_1[-1].to_i*_2}

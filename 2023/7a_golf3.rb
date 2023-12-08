@@ -1,0 +1,1 @@
+p$<.map(&:split).sort_by{|h,|[h.chars.tally.values.then{_1.max-_1.size},h.tr('AKQJT','EDCBA')]}.zip(1..).sum{_1[-1].to_i*_2}
