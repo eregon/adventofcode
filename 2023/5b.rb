@@ -12,7 +12,7 @@ reversed_maps = maps.map { |map|
 p (0..).find { |n|
   p n if n % 100_000 == 0
   r = reversed_maps.reduce(n) { |v, map|
-    range = map.keys.find { |range| range === v }
+    range = map.keys.find { |range| break if range.begin > v; range === v }
     if range
       map[range] + v
     else
