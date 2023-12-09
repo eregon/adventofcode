@@ -1,0 +1,1 @@
+m,_,*r=*$<;r=r.to_h{a,*b=_1.scan /\w+/;[a,b]};s=-1;c=r[c||?A*3][m[(s+=1)%(m.size-1)].ord/82]until c==?Z*3;p s+1
