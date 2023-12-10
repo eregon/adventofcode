@@ -1,0 +1,1 @@
+m=$<.read;w=m=~/$/;m.tr!"\n",'';s=m.index'S';d={?L=>[1,-w],?J=>[-1,-w],?7=>[-1,w],?F=>[1,w],?-=>[-1,1],?|=>[-w,w]};m[s]=d.key [1,-1,w,-w].filter_map{|e|e if d[m[s+e]]&.any? -e};o,c,p=s,1,s+d[m[s]][0];(a,b=d[m[p]];o,p=p,p+a!=o ?p+a:p+b;c+=1)until p==s;p c/2
