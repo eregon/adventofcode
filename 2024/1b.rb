@@ -1,0 +1,1 @@
+p File.readlines(*$*).map { it.split.map(&:to_i) }.transpose.then { |l,r| l.sum { |n| n * r.count(n) } }
