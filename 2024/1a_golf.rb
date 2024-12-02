@@ -1,0 +1,1 @@
+p$<.read.scan(/(\d+)\s+(\d+)/).transpose.map{it.map(&:to_i).sort}.then{_1.zip(_2)}.sum{(_1-_2).abs}

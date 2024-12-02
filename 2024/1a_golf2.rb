@@ -1,0 +1,1 @@
+p$<.map(&:split).transpose.map{it.map(&:to_i).sort}.transpose.sum{(_1-_2).abs}
