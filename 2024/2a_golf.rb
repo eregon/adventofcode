@@ -1,0 +1,1 @@
+p$<.count{l=it.split.map &:to_i;a,b=l;l.reverse!if a>b;l.each_cons(2).all?{_2>_1&&_2<_1+4}}
