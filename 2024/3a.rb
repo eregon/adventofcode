@@ -1,0 +1,1 @@
+def mul(a,b)=a*b;p$<.read.scan(/mul\(\d{1,3},\d{1,3}\)/).sum{eval it}
