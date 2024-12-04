@@ -1,0 +1,1 @@
+p [-(w=((c=$<.read)=~/$/)+1),-2,-1,0].sum{s=c+??*w+c.reverse;o=n=0;(n+=1;s=s[o+1..])while o=/#{%w[X M A S].join".{#{w+it}}"}/m=~s;n}

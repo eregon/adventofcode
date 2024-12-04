@@ -1,0 +1,1 @@
+z=->s,r{o=n=0;(n+=1;s=s[o+1..])while o=r=~s;n};p [-(w=((c=$<.read)=~/$/)+1),-2,-1,0].sum{r=/#{%w[X M A S].join".{#{w+it}}"}/m;z[c,r]+z[c.reverse,r]}
