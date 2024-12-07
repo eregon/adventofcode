@@ -1,0 +1,1 @@
+r={};(c=$<.read).scan(/(.+)\|(.+)/){(r[_1]||=[])<<_2};c[/\n\n/];p$'.lines.map{it.scan /\d+/}.sum{|q|q.none?{|p|r[p]&.any?{(j=q.index it)&&j<q.index(p)}}?q[q.size/2].to_i: 0}
