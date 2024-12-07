@@ -1,0 +1,1 @@
+e=[d=-(w=((m=$<.read)=~/$/)+1),1,w,-1].cycle;p=m.index'^';loop{m[p]=?X;d=e.next while((z=m[c=p+d])&&c>=0&&z!=?\n||(p m.count'X';exit))&&z==?#;p=c}
