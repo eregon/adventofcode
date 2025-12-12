@@ -1,0 +1,1 @@
+d=50;p$<.map{(d+=it.tr('LR','-+').to_i)%100}.count 0

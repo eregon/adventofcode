@@ -1,0 +1,1 @@
+p$<.read.chomp.split(?,).sum{a,b=it.split ?-;(a[..s=a.size/-2-1].to_i..b[..s].to_i).sum{a.to_i<=(n="#{it}#{it}".to_i)&&n<=b.to_i ? n:0}}
