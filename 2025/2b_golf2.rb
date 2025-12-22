@@ -1,0 +1,1 @@
+$<.read.split(/\D/).each_slice(2){|a,b,d=(c=b).size|s=a.size;b=?9*s if s<d;(1..s/2).map{|z|(a[0,z]..b[0,z]).map{n=it*(s/z);$*<<n.to_i if(a..b).cover? n}if s%z==0};a,b=?1+?0*s,c;redo if s<d};p$*.uniq.sum
