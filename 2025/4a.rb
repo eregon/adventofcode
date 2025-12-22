@@ -1,0 +1,10 @@
+set = Set[]
+$<.each_with_index {|row,y|
+  row.chomp.chars.each_with_index{|v,x|
+    set << y.i+x if v == '@'
+  }
+}
+
+p set.count { |c|
+  (set & Set[c-1i-1, c-1i, c-1i+1, c-1, c+1, c+1i-1, c+1i, c+1i+1]).size < 4
+}
