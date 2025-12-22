@@ -1,38 +1,35 @@
-# TODO
-
-ranges = $<.read.strip.split(",").map {
+ranges = $<.read.strip.split(",").flat_map {
   a, b = it.split('-')
-  # p [a,b]
-  # raise if (a.size - b.size).abs > 1
-  if a.size.odd?
-    a = '1' + '0' * a.size
-  end
-  if b.size.odd?
-    b = '9' * (b.size - 1)
-  end
-  
-  if a.to_i > b.to_i
-    nil
-  else
-    raise [a,b].inspect unless a.size == b.size
-    raise unless a.size.even?
-    a.to_i..b.to_i
-  end
-}.compact
-p ranges
+  raise if a.to_i > b.to_i
 
-silly = []
+  if a.size == b.size
+    a.to_i..b.to_i
+  else
+    raise unless a.size + 1 == b.size
+    [
+      a.to_i..('9' * a.size).to_i,
+      ('1' + '0' * a.size).to_i..b.to_i
+    ]
+  end
+}
+silly = Set.new
 
 ranges.each { |range|
   a, b = range.begin, range.end
   as, bs = a.to_s, b.to_s
   s = as.size
-  a_first_half = as[0...s/2]
-  b_first_half = bs[0...s/2]
-  p [a, b, a_first_half, b_first_half]
-  (a_first_half..b_first_half).each { |half|
-    n = "#{half}#{half}".to_i
-    silly << n if range.cover? n
+
+  max = s / 2
+  (1..max).each { |stride|
+    if s % stride == 0
+      repeats = s / stride
+      a_first_part = as[0...stride]
+      b_first_part = bs[0...stride]
+      (a_first_part..b_first_part).each { |part|
+        n = (part * repeats).to_i
+        silly << n if range.cover? n
+      }
+    end
   }
 }
 
