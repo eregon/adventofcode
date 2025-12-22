@@ -1,0 +1,1 @@
+p$<.sum{(a=(d=it.to_i.digits)[1..].max)*10+d[...d.rindex(a)].max}
